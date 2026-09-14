@@ -2,7 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Olivier Marin - Resume</title>
+  <meta name="description" content="Chair Professor at the School of Design, Shanghai University of Engineering Science, and head of the Humans + Machines MA program. Distributed systems researcher with over twenty years of international experience.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Olivier Marin">
+  <meta property="og:title" content="Olivier Marin">
+  <meta property="og:description" content="Chair Professor at the School of Design, Shanghai University of Engineering Science, and head of the Humans + Machines MA program. Distributed systems researcher with over twenty years of international experience.">
+  <meta property="og:url" content="https://olivier-marin.github.io/">
+  <meta property="og:image" content="https://olivier-marin.github.io/Pix/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -111,9 +122,14 @@
     <section>
       <h2>Contact</h2>
       <p>
-        Email:
+        University:
         <!-- visible, obfuscated text for users; link assembled by JS to avoid simple crawlers -->
-        <a id="email-link" href="#">racine75 [at] gmail [dot] com</a>
+        <a id="email-sues" href="#">omarin [at] sues [dot] edu [dot] cn</a>
+        <noscript> (JavaScript is disabled; email shown as text to avoid scraping: omarin [at] sues [dot] edu [dot] cn)</noscript>
+      </p>
+      <p>
+        Personal:
+        <a id="email-personal" href="#">racine75 [at] gmail [dot] com</a>
         <noscript> (JavaScript is disabled; email shown as text to avoid scraping: racine75 [at] gmail [dot] com)</noscript>
       </p>
     </section>
@@ -123,19 +139,20 @@
     <p>© Olivier Marin</p>
   </footer>
 
-  <!-- Email obfuscation script: constructs a proper mailto link in the browser -->
+  <!-- Email obfuscation script: constructs proper mailto links in the browser -->
   <script>
     (function() {
-      var user = 'racine75';
-      var domain = 'gmail.com';
-      var el = document.getElementById('email-link');
-      if (!el) return;
-      // display obfuscated text to users
-      el.textContent = user + ' [at] ' + domain.replace('.', ' [dot] ');
-      // produce clickable mailto link
-      el.href = 'mailto:' + user + '@' + domain;
-      // optional: set rel attributes to be safe
-      el.setAttribute('rel', 'noopener noreferrer');
+      // replace() with a string argument only swaps the FIRST match, which breaks
+      // multi-dot domains such as sues.edu.cn; the global regex handles both.
+      function wire(id, user, domain) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.textContent = user + ' [at] ' + domain.replace(/\./g, ' [dot] ');
+        el.href = 'mailto:' + user + '@' + domain;
+        el.setAttribute('rel', 'noopener noreferrer');
+      }
+      wire('email-sues', 'omarin', 'sues.edu.cn');
+      wire('email-personal', 'racine75', 'gmail.com');
     })();
   </script>
 </body>
